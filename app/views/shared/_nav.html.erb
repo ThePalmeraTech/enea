@@ -20,10 +20,10 @@
                     <div class="col-lg-1 mt-4"><%= link_to 'Sign out  ', destroy_user_session_path, data: { turbo_method: :delete } %></div>
                   <% end %>
                    <div class="col-lg-4 text-center">
-                    <a href="/" class="logo">La Central</a>
+                    <a href="/" class="logo">Enea Lebrun</a>
                   </div>
                   <% if user_signed_in? %>
-                    <div class="col-lg-4 mt-4 text-end"><h6>Hi <b><%= current_user.username %></b>, you're <b><%= current_user.role %></b> in La Central</h6></div>
+                    <div class="col-lg-4 mt-4 text-end"><h6>Hi <b><%= current_user.username %></b>, you're <b><%= current_user.role %></b> in <b>EneaLebrun.com</b></h6></div>
                   <% end %>
               </div>
 
