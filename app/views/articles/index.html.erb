@@ -2,26 +2,22 @@
     <p class="signature">Made with ♥ by <a href="http://www.palmeratech.com/"> Hanaley Mosley </a></p>
 
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-12">
         <% @articles.last(7).reverse.each do |article| %>
           <%= link_to article do %>
             <div class="horizontal-card mb-2">
             <div class="row">
                 <% if article.photo.present? %>
-                  <div class="col-lg-4">
-                    <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
+                  <div class="col-lg-12">
+                    <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');    height: 80vh;"></div>
                   </div>
                 <% else %>
-                <div class="col-lg-4">
-                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
+                <div class="col-lg-12">
+                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');    height: 80vh;">
                   </div>
                   </div>
                 <% end %>
 
-                <div class="col-lg-8 p-3">
-                  <h5><%= article.title %></h5>
-                  <p class="article-data"><%= article.created_at %> | <%= article.user.username %></p>
-                </div>
               </div>
             </div>
           <% end %>
