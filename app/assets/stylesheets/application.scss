@@ -26,12 +26,47 @@ a:hover {
   color: #10303a;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Comfortaa', cursive;
+}
+
 section {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 16px;
+  padding-right: 16px;
   height: 100vh;
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Comfortaa', cursive;
+  .showroom {
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    justify-content: center;
+
+    .art-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 20%;
+      min-height: 99vh;
+      overflow-y: hidden
+    }
+
+    .art-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 60%;
+      }
+
+      .gallery-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 20%;
+        padding: 0;
+        margin: 0;
+      }
+    }
   }
-}
