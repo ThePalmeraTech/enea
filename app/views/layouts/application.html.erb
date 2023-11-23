@@ -75,12 +75,15 @@
                         <ul>
                           <% @articles.each do |article| %>
                             <%= link_to article do %>
-                              <li><%= article.title %></li>
+                              <li style="background:#fbfbfb;padding:16px"><%= article.title %></li>
                             <% end %>
                           <% end %>
                         </ul>
                       <% else %>
-                        <p>No articles found.</p>
+                        <ul>
+                          <li style="background:#fbfbfb;padding:16px">No hay proyectos listados</li>
+
+                        </ul>
                     <% end %>
 
 
