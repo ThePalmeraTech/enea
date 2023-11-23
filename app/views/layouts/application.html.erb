@@ -63,84 +63,40 @@
           <div class="showroom">
 
             <div class="art-menu">
-              <p>
-                I'm the menu
-              </p>
                 <h1><a href="/">Enea Lebrun</a></h1>
-              <div class='nav animated bounceInDown'>
-                <ul>
-                  <li><a href="#biografia">Biografia</a></li>
-                  <li class="sub-menu"><a href='#proyectos'>Proyectos<i class='fa fa-caret-down right'></i></a>
-                    <% if @articles.present? && @articles.any? %>
-                        <ul>
-                          <% @articles.each do |article| %>
-                            <%= link_to article do %>
-                              <li style="background:#fbfbfb;padding:16px"><%= article.title %></li>
+                <div class='nav animated bounceInDown'>
+                  <ul>
+                    <li><a href="#biografia">Biografia</a></li>
+                    <li class="sub-menu"><a href='#proyectos'>Proyectos<i class='fa fa-caret-down right'></i></a>
+                      <% if @articles.present? && @articles.any? %>
+                          <ul>
+                            <% @articles.each do |article| %>
+                              <%= link_to article do %>
+                                <li style="background:#fbfbfb;padding:16px"><%= article.title %></li>
+                              <% end %>
                             <% end %>
-                          <% end %>
-                        </ul>
-                      <% else %>
-                        <ul>
-                          <li style="background:#fbfbfb;padding:16px">No hay proyectos listados</li>
+                          </ul>
+                        <% else %>
+                          <ul>
+                            <li style="background:#fbfbfb;padding:16px">No hay proyectos listados</li>
 
-                        </ul>
-                    <% end %>
+                          </ul>
+                      <% end %>
 
 
-                  </li>
-                  <li><a href='#contacto'>Contacto</a></li>
-                </ul>
-              </div>
+                    </li>
+                    <li><a href='#contacto'>Contacto</a></li>
+                  </ul>
+                </div>
             </div>
 
             <div class="art-content">
-              <p>
-                I'm the content
-              </p>
               <%= yield %>  <!-- this is where the content of the view will be rendered -->
-            </div>
-
-            <div class="gallery-list">
-              <p>
-                I'm the list of latest articles
-              </p>
-
-              <% if @articles.present? %>
-                  <% @articles.last(7).reverse.each do |article| %>
-          <%= link_to article do %>
-            <div class="horizontal-card mb-2">
-            <div class="row">
-                <% if article.photo.present? %>
-                  <div class="col-lg-4">
-                    <div class="image" style="background-image: url('<%= cl_image_path(article.photo.key) %>');"></div>
-                  </div>
-                <% else %>
-                <div class="col-lg-4">
-                  <div class="image" style="background-image: url('https://imagenes.laestrella.com.pa/files/content_image/uploads/2020/08/12/5f3476619cee1.jpeg');">
-                  </div>
-                  </div>
-                <% end %>
-
-                <div class="col-lg-8 p-3">
-                  <h5><%= article.title %></h5>
-                  <p class="article-data"><%= article.created_at %> | <%= article.user.username %></p>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-                <% else %>
-                  <p>No se encontraron proyectos.</p>
-                <% end %>
-
-
             </div>
 
           </div>
 
       </section>
-
-
 
        <!-- LIGHTBOX INITIALIZATION -->
       <script type="text/javascript">
