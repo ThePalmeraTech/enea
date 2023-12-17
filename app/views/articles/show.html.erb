@@ -60,6 +60,12 @@
                 </div>
               <% end %>
 
+             <% if @article.vimeo_link.present? %>
+                <% vimeo_id = @article.vimeo_link.split('/').last %>
+                <iframe src="https://player.vimeo.com/video/<%= vimeo_id %>" width="640" height="267" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <% end %>
+
+
               <div>
                 <% if user_signed_in? && (@article.user == current_user || current_user.role == 'admin') %>
                   <%= link_to 'Edit', edit_article_path(@article) %> |

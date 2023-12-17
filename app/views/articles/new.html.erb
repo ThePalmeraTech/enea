@@ -17,7 +17,7 @@
     <div>
     <%= f.text_field :title %>
     </div>
-    
+
     <div>
     <%= f.file_field :photo, as: :file %>
     </div>
@@ -37,6 +37,11 @@
       <%= f.rich_text_area :body %>
       <%= f.hidden_field :user_id, value: current_user.id %>
     </div>
+
+    <div class="field">
+    <%= f.label :vimeo_link, "Vimeo Video Link" %>
+    <%= f.text_field :vimeo_link %>
+  </div>
 
     <div>
       <%= f.submit %>
