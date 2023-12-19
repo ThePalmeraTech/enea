@@ -11,8 +11,6 @@
                     <div class="slider">
                         <!-- Sign in area - Slide 1 start-->
                         <div class="slide" style="background-image: url('<%= cl_image_path @article.photo.key %>'); width:100%; height:100%;background-size:cover; background-repeat:no-repeat">
-                            <!-- Your content here -->
-                            <h1>test</h1>
                         </div>
                         <!-- Sign in area end-->
 
@@ -23,14 +21,18 @@
                             </div>
                         </div>
 
-                        <div class="slide">
-                            <% if @article.vimeo_link.present? %>
-                                <div class="view" id="view3">
-                                    <% vimeo_id = @article.vimeo_link.split('/').last %>
-                                    <iframe src="https://player.vimeo.com/video/<%= vimeo_id %>" width="640" height="267" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                            <% end %>
-                        </div>
+                         <% if @article.vimeo_link.present? %>
+                            <div class="slide">
+                              <div class="view" id="view3">
+                                 <!-- Responsive iframe container -->
+                                  <div style="padding:56.25% 0 0 0;position:relative;">
+                                      <% vimeo_id = @article.vimeo_link.split('/').last %>
+                                      <iframe src="https://player.vimeo.com/video/<%= vimeo_id %>" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                  </div>
+                                  <script src="https://player.vimeo.com/api/player.js"></script>
+                              </div>
+                            </div>
+                          <% end %>
                     </div>
 
                     <div class="slider-dots">
