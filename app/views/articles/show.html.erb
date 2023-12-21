@@ -10,7 +10,7 @@
                 <div class="slider-container">
                     <div class="slider">
                         <!-- Sign in area - Slide 1 start-->
-                        <div class="slide" style="background-image: url('<%= cl_image_path @article.photo.key %>'); width:100%; height:100%;background-size:cover; background-repeat:no-repeat">
+                        <div class="slide article-mobile" style="background-image: url('<%= cl_image_path @article.photo.key %>');">
                         </div>
                         <!-- Sign in area end-->
 
@@ -46,5 +46,18 @@
             </div>
         </div>
         <hr>
+         <div>
+                <% if user_signed_in? && (@article.user == current_user || current_user.role == 'admin') %>
+                  <%= link_to 'Edit', edit_article_path(@article) %> |
+                  <%= link_to "Delete article", article_path(@article), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+                <% else %>
+                <p>
+                  <%= link_to 'Atrás', root_path %>
+                </p>
+                <% end %>
+              </div>
     </div>
 </section>
