@@ -1,5 +1,5 @@
 class ChangeBodyColumnTypeInArticles < ActiveRecord::Migration[7.0]
   def change
-    change_column :articles, :body, :rich_text
+    remove_column :articles, :body, :text if column_exists?(:articles, :body)
   end
 end

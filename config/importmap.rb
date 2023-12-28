@@ -13,3 +13,6 @@ pin "@rails/actiontext", to: "actiontext.js"
 pin_all_from "app/javascript/snippets", under: "snippets"
 pin "alloy_finger", to: "alloy_finger.min.js"
 pin "lc_lightbox", to: "lc_lightbox.lite.js"
+# config/importmap.rb
+pin_all_from "app/javascript/components", under: "components"
+# ...

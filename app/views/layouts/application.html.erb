@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
@@ -37,26 +36,10 @@
 }
 </style>
 
-<!-- LIGHTBOX FADING SHOW/HIDE EFFECT (as explained in documentation) -->
-<style type="text/css">
-.lcl_fade_oc.lcl_pre_show #lcl_overlay,
-.lcl_fade_oc.lcl_pre_show #lcl_window,
-.lcl_fade_oc.lcl_is_closing #lcl_overlay,
-.lcl_fade_oc.lcl_is_closing #lcl_window {
-	opacity: 0 !important;
-}
-.lcl_fade_oc.lcl_is_closing #lcl_overlay {
-	-webkit-transition-delay: .15s !important;
-	transition-delay: .15s !important;
-}
-</style>
   </head>
 
   <body>
     <%= render 'shared/nav' %>
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
 
       <section>
 
@@ -67,15 +50,16 @@
                 <div class='nav animated bounceInDown'>
                   <ul>
                     <li><a href="#biografia">Biografia</a></li>
-                    <li class="sub-menu"><a href='#proyectos'>Proyectos<i class='fa fa-caret-down right'></i></a>
                       <% if @articles.present? && @articles.any? %>
-                          <ul>
+
                             <% @articles.each do |article| %>
-                              <%= link_to article do %>
-                                <li style="background:#fbfbfb;padding:16px"><%= article.title %></li>
-                              <% end %>
+
+                                <li>
+                                    <%= link_to article do %>
+                                       <%= article.title %></li>
+                                     <% end %>
                             <% end %>
-                          </ul>
+
                         <% else %>
                           <ul>
                             <li style="background:#fbfbfb;padding:16px">No hay proyectos listados</li>
@@ -84,7 +68,7 @@
                       <% end %>
 
 
-                    </li>
+
                     <li><a href='#contacto'>Contacto</a></li>
                   </ul>
                 </div>
@@ -96,34 +80,14 @@
 
           </div>
 
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
       </section>
 
-       <!-- LIGHTBOX INITIALIZATION -->
-      <script type="text/javascript">
-          $(document).ready(function(e) {
 
-            // live handler
-            lc_lightbox('.elem', {
-              wrap_class: 'lcl_fade_oc',
-              gallery : true,
-              thumb_attr: 'data-lcl-thumb',
 
-              skin: 'minimal',
-              radius: 0,
-              padding	: 0,
-              border_w: 0,
-            });
-
-          });
-      </script>
-
-      <script>
-      $('.sub-menu ul').hide();
-$(".sub-menu a").click(function () {
-	$(this).parent(".sub-menu").children("ul").slideToggle("100");
-	$(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
-});
- </script>
 
   </body>
 </html>

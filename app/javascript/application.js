@@ -7,3 +7,5 @@ import "@popperjs/core"
 
 import "trix"
 import "@rails/actiontext"
+
+import "components/swiper"
