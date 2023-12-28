@@ -19,6 +19,10 @@ group :production do
   gem 'pg'
 end
 
+# Active Record PostgreSQL ENUM support [
+gem 'activerecord-postgres_enum', '~> 2.0', '>= 2.0.1'
+
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
