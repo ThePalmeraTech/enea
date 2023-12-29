@@ -50,22 +50,20 @@
                 <div class='nav animated bounceInDown'>
                   <ul>
                     <li><a href="#biografia">Biografia</a></li>
-                      <% if @articles.present? && @articles.any? %>
-
-                            <% @articles.each do |article| %>
-
-                                <li>
-                                    <%= link_to article do %>
-                                       <%= article.title %></li>
-                                     <% end %>
+                     <% if @articles.present? && @articles.any? %>
+                        <% @articles.reverse_each do |article| %>
+                          <li>
+                            <%= link_to article do %>
+                              <%= article.title %>
                             <% end %>
-
-                        <% else %>
-                          <ul>
-                            <li style="background:#fbfbfb;padding:16px">No hay proyectos listados</li>
-
-                          </ul>
+                          </li>
+                        <% end %>
+                      <% else %>
+                        <ul>
+                          <li style="background:#fbfbfb;padding:16px">No hay proyectos listados</li>
+                        </ul>
                       <% end %>
+
 
 
 
