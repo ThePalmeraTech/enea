@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="mb-5 article-title">
+                <h1 class="mb-3 article-title">
                     <%= @article.title %>
                 </h1>
             </div>
@@ -10,7 +10,7 @@
                 <div class="slider-container">
                     <div class="slider">
                         <!-- Sign in area - Slide 1 start-->
-                        <div class="slide article-mobile" style="background-image: url('<%= cl_image_path @article.photo.key %>');">
+                        <div class="slide article-mobile" style="background-image: url('<%= cl_image_path @article.photo.key %>');background-size: contain;  background-repeat: no-repeat; background-position-x: 52%;">
                         </div>
                         <!-- Sign in area end-->
 
