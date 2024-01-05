@@ -24,12 +24,13 @@
 
                         <!-- Additional slides for each image -->
                         <% if @article.images.attached? %>
-                            <% @article.images.each_with_index do |image, index| %>
-                                <div class="slide">
-                                    <%= cl_image_tag image.key, class: "slide-image" %>
-                                </div>
-                            <% end %>
+                          <% @article.images.each_with_index do |image, index| %>
+                            <div class="slide article-mobile text-center" style="background-image: url('<%= cl_image_path image.key %>'); background-size: contain; background-repeat: no-repeat; background-position-x: 52%;">
+                              <!-- Content for the slide -->
+                            </div>
+                          <% end %>
                         <% end %>
+
 
                         <!-- Vimeo embed field -->
                         <% if @article.vimeo_link.present? %>
