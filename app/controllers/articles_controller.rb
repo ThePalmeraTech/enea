@@ -14,19 +14,14 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    if params[:article][:photo].present?
-      @article.photo.attach(params[:article][:photo])
-    end
-    if params[:article][:images].present?
-      @article.images.attach(params[:article][:images])
-    end
-    if @article.save
 
+    if @article.save
       redirect_to @article
     else
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def edit
     @article = Article.find(params[:id])
@@ -34,12 +29,14 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
+
     if @article.update(article_params)
       redirect_to @article
     else
       render :edit, status: :unprocessable_entity
     end
   end
+
 
   def destroy
     @article = Article.find(params[:id])
@@ -51,6 +48,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :category_id, :user_id, :vimeo_link, :vimeo_link, :photo, images: [])
+    params.require(:article).permit(:title, :body, :category_id, :user_id, :vimeo_link, :photo, images: [])
   end
 end
