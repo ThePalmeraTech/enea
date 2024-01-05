@@ -71,4 +71,14 @@ document.addEventListener("turbo:load", function() {
 
   // Initialize
   updateDots(0);
+
+  // After the existing JavaScript for the slider
+document.querySelector('.slider').addEventListener('touchstart', function() {
+  document.querySelector('.swipe-instruction').style.display = 'none';
+});
+
+document.querySelector('.slider').addEventListener('mousedown', function() {
+  document.querySelector('.swipe-instruction').style.display = 'none';
+});
+
 });
