@@ -9,3 +9,4 @@ import "trix"
 import "@rails/actiontext"
 
 import "components/swiper"
+import "components/mobilemenu"

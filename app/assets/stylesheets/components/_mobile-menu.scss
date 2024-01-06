@@ -1,57 +1,81 @@
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  background-color: #fff;
-}
-
-#menu-toggle {
-  background-color: #fff;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-#mobile-menu {
-  position: fixed;
+.header {
+  background-color: white;
+  position: fixed; // This establishes a new stacking context.
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: #fff;
-  transition: transform 0.3s ease-in-out;
-}
+  z-index: 9999; // High value to ensure it's on top of other elements.
 
-#mobile-menu ul {
-  list-style: none;
-  padding: 1rem;
-}
-
-#mobile-menu ul li {
-  margin-bottom: 0.5rem;
-}
-
-#mobile-menu ul li a {
-  text-decoration: none;
-  color: #333;
-  font-size: 1.1rem;
-  padding: 0.5rem;
-  display: block;
-}
-
-#mobile-menu ul li a:hover {
-  background-color: #eee;
-}
-
-.menu-open #mobile-menu {
-  transform: translateX(0);
-}
-
-@media only screen and (min-width: 768px) {
-  #mobile-menu {
-    display: none;
+  button#menu-button {
+    color: black;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+    position: relative; // Ensure button is positioned for z-index to take effect.
+    z-index: 10000; // Even higher to stack above anything within the header.
   }
+
+  nav#mobile-menu {
+    background-color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative; // Ensure nav is positioned for z-index to take effect.
+    z-index: 9998; // Below the button but above other content.
+    display: none; // Start with the menu hidden.
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Media queries to handle the responsiveness */
+  @media only screen and (max-width: 768px) {
+
+    button#menu-button {
+      display: block; // Show on mobile devices
+    }
+
+    nav#mobile-menu {
+      // No 'display' rule here; it's controlled by the 'menu-open' class
+    }
+  }
+
+  @media only screen and (min-width: 769px) {
+    button#menu-button {
+      display: none; // Hide on larger screens
+    }
+
+    nav#mobile-menu {
+      display: none; // Hide on larger screens
+    }
+  }
+}
+
+/* Styles for when the menu is open */
+nav#mobile-menu.menu-open {
+  display: block;
+  z-index: 9998; // This ensures that the menu is visible and stacks correctly.
+  // The background color was just for testing; you can remove it if not needed.
+}
+
+
+@media (min-width: 768px) and (max-width: 1600px) {
+ .header {
+  display: none;
+ }
+
 }

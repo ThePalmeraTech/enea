@@ -22,7 +22,7 @@
   background-color: #ffffff;
   padding-left: 25px;
   padding-right: 25px;
-  overflow-y: scroll;
+  overflow-y:auto;
 }
 
 .slide h2 {
@@ -99,10 +99,10 @@
 
 
 
-@media (min-width: 280px) and (max-width: 390px) {
+@media (min-width: 280px) and (max-width: 768px) {
   .slider-container {
     position: relative;
-    min-height: 34vh;
+    min-height: 95vh;
     overflow-x: hidden;
   }
 
@@ -117,8 +117,8 @@
 
 .slider-dots {
   position: fixed;
-  bottom: 3vh;
-  left: 50%;
+  bottom: 8vh;
+  left: 48%;
   transform: translateX(-50%);
   display: flex;
 }
@@ -128,6 +128,14 @@
   width: 34px;
   border-radius: 13px;
   height: 7px;
+}
+
+.slide {
+  overflow-y:none;
+}
+
+.article-title {
+  margin-top: 7vh;
 }
 
 }
