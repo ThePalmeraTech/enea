@@ -87,7 +87,7 @@ section {
   }
 
 
-  @media (min-width: 280px) and (max-width: 390px) {
+  @media (min-width: 280px) and (max-width: 520px) {
 
     section .showroom .art-menu {
       display: none;
@@ -100,6 +100,16 @@ section {
     width: 100%;
     position: relative;
     margin-right: 0px;
+}
+
+section {
+  padding-left: 0;
+  padding-right: 0;
+  min-height: 90vh;
+}
+
+.slider {
+  min-height: 99vh;
 }
 
   }
