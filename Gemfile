@@ -94,7 +94,3 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
-
-
-git add Gemfile Gemfile.lock
-git commit -m "Update Puma to patch security vulnerability"
