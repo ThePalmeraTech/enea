@@ -10,3 +10,4 @@ import "@rails/actiontext"
 
 import "components/swiper"
 import "components/mobilemenu"
+import "components/masonry"
