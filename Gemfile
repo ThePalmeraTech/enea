@@ -24,7 +24,7 @@ gem 'activerecord-postgres_enum', '~> 2.0', '>= 2.0.1'
 
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem 'puma', '~> 6.4.2'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -94,3 +94,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+
+git add Gemfile Gemfile.lock
+git commit -m "Update Puma to patch security vulnerability"
