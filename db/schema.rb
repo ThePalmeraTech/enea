@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_17_211124) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_20_012539) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -47,6 +47,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_17_211124) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "archivos", force: :cascade do |t|
+    t.string "title"
+    t.integer "category_id", null: false
+    t.integer "user_id", null: false
+    t.string "vimeo_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_archivos_on_category_id"
+    t.index ["user_id"], name: "index_archivos_on_user_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -94,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_17_211124) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "archivos", "categories"
+  add_foreign_key "archivos", "users"
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"

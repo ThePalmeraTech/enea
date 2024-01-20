@@ -1,0 +1,65 @@
+<div class="container">
+  <h1>Edit Archivo</h1>
+  <% if @archivo.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@archivo.errors.count, "error") %> prohibited this archivo from being saved:</h2>
+    <ul>
+      <% @archivo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <%= simple_form_for(@archivo, html: { multipart: true }) do |f| %>
+
+    <div>
+      <%= f.label :title, "Título de obra", class: "form-label" %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="row p-3">
+      <div class="col-md-4">
+        <%= f.label "Imagen de portada", class: "form-label" %>
+        <%= f.file_field :photo, as: :file, class: "form-control" %>
+        <% if @archivo.photo.attached? %>
+          <div class="mt-2">
+            <%= image_tag @archivo.photo, class: "img-fluid" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.label :category_id, "Categoría", class: "form-label" %><br>
+        <%= f.select :category_id, options_for_select(Category.all.map { |c| [c.name, c.id] }, @archivo.category_id), class: "form-control" %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.label :images, 'Images', class: "form-label" %>
+        <%= f.file_field :images, multiple: true %>
+        <% if @archivo.images.attached? %>
+          <% @archivo.images.each do |img| %>
+            <div class="mt-2">
+              <%= image_tag img, class: "img-fluid" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :body, "Contenido", class: "form-label" %>
+      <%= f.rich_text_area :body, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :vimeo_link, "Vimeo Video Link", class: "form-label" %>
+      <%= f.text_field :vimeo_link, class: "form-control" %>
+    </div>
+
+    <div class="actions mt-4">
+      <%= f.submit "Update Archivo", class: "btn btn-primary" %>
+      <%= link_to 'Cancel', archivo_path(@archivo), class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>
