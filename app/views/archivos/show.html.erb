@@ -1,0 +1,117 @@
+<section id="archivo">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="mb-3 archivo-title">
+                    <%= @archivo.title %>
+                </h1>
+                <!-- Swipe Instruction -->
+                <div class="swipe-instruction">
+                    <p>Desliza para ver más &rarr;</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="slider-container">
+                    <div class="slider">
+                        <!-- Slide 1 with Cloudinary image -->
+                        <% if @archivo.photo.attached? %>
+                            <div class="slide archivo-mobile text-center" style="background-image: url('<%= cl_image_path @archivo.photo.key %>'); background-size: contain; background-repeat: no-repeat; background-position-x: 52%;">
+                            </div>
+                        <% end %>
+
+                        <!-- Slide 2 with archivo body -->
+                         <% if @archivo.body? %>
+                          <div class="slide">
+                              <div class="trix-content">
+                                  <%= @archivo.body %>
+                              </div>
+                          </div>
+                        <% end %>
+
+                        <!-- Additional slides for each image -->
+                        <% if @archivo.images.attached? %>
+                            <% @archivo.images.each_with_index do |image, index| %>
+                                <div class="slide archivo-mobile text-center" style="background-image: url('<%= cl_image_path image.key %>'); background-size: contain; background-repeat: no-repeat; background-position-x: 52%;">
+                                    <!-- Content for the slide -->
+                                </div>
+                            <% end %>
+                        <% end %>
+
+                        <!-- Vimeo embed field -->
+                        <% if @archivo.vimeo_link.present? %>
+                            <div class="slide">
+                                <div class="view" id="view3">
+                                    <!-- Responsive iframe container -->
+                                    <div style="padding:56.25% 0 0 0;position:relative;">
+                                        <% vimeo_id = @archivo.vimeo_link.split('/').last %>
+                                        <iframe src="https://player.vimeo.com/video/<%= vimeo_id %>" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <script src="https://player.vimeo.com/api/player.js"></script>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+
+                    <!-- Inside the slider-container -->
+                    <% total_slides = @archivo.images.attached? ? @archivo.images.count : 0 %>
+                    <% total_slides += @archivo.photo.attached? ? 1 : 0 %>
+                    <% total_slides += @archivo.body.present? ? 1 : 0 %>
+                    <% total_slides += @archivo.vimeo_link.present? ? 1 : 0 %>
+
+                    <% if total_slides > 1 %>
+                      <div class="arrow-left">&larr;</div>
+                      <div class="arrow-right">&rarr;</div>
+                    <% end %>
+                    <!-- Slider dots -->
+                    <div class="slider-dots">
+                        <!-- Logic for adding dots based on the content -->
+                        <span class="dot active"></span>
+                        <% if @archivo.vimeo_link.present? %>
+                            <span class="dot"></span>
+                        <% end %>
+                        <% if @archivo.images.attached? %>
+                            <% @archivo.images.each_with_index do |image, index| %>
+                                <span class="dot <%= 'active' if index.zero? %>"></span>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <% if user_signed_in? && (@archivo.user == current_user || current_user.role == 'admin') %>
+                <%= link_to 'Edit', edit_archivo_path(@archivo) %> |
+                <%= link_to "Delete archivo", archivo_path(@archivo), method: :delete, data: { confirm: "Are you sure?" }, class: "text-danger" %>
+            <% else %>
+                <p>
+                    <%= link_to 'Atrás', archivos_path %>
+                </p>
+            <% end %>
+        </div>
+    </div>
+</section>
+
+
+<!-- At the end of your `show.html.erb` file -->
+<script type="text/javascript">
+  window.addEventListener('load', (event) => {
+    var totalSlides = 0;
+    totalSlides += <%= @archivo.photo.attached? ? 1 : 0 %>;
+    totalSlides += <%= @archivo.body.present? ? 1 : 0 %>;
+    totalSlides += <%= @archivo.images.attached? ? @archivo.images.count : 0 %>;
+    totalSlides += <%= @archivo.vimeo_link.present? ? 1 : 0 %>;
+
+    if (totalSlides > 1) {
+      document.querySelector('.arrow-left').style.display = 'block';
+      document.querySelector('.arrow-right').style.display = 'block';
+    }
+  });
+</script>
+
+<!-- Hide arrows by default in your CSS -->
+<style type="text/css">
+  .arrow-left, .arrow-right {
+    display: none;
+  }
+</style>

@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>New Archivo</h1>
+  <% if @archivo.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@archivo.errors.count, "error") %> prohibited this archivo from being saved:</h2>
+    <ul>
+      <% @archivo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <%= simple_form_for(@archivo, html: { multipart: true }) do |f| %>
+
+    <!-- [...] -->
+    <div>
+      <%= f.label :title, "Título de obra", class: "form-label" %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+
+
+    <div class="row p-3">
+      <div class="col-md-4">
+        <%= f.label "Imagen de portada", class: "form-label" %>
+        <%= f.file_field :photo, as: :file, class: "form-control" %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.label :category_id, "Selecciona una categoría o #{link_to 'agrega una nueva', new_category_path}".html_safe, class: "form-label" %> <br>
+        <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }), class: "form-control" %>
+      </div>
+
+      <div class="field col-md-4">
+        <%= f.label :images, 'Images', class: "form-label" %>
+        <%= f.file_field :images, multiple: true %>
+      </div>
+
+    </div>
+
+    <div>
+      <%= f.label :body , class: "form-label" %>
+      <%= f.rich_text_area :body, class: "form-control" %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+    </div>
+
+    <div class="field">
+      <%= f.label :vimeo_link, "Vimeo Video Link", class: "form-label" %>
+      <%= f.text_field :vimeo_link, class: "form-control" %>
+    </div>
+
+
+    <div class="save-archivo mt-4">
+      <%= f.submit %>
+    </div>
+    <!-- [...] -->
+  <% end %>
+
+</div>

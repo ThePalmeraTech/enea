@@ -1,17 +1,17 @@
 <div class="container">
   <h1>Edit Archivo</h1>
-  <% if @article.errors.any? %>
+  <% if @archivo.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@article.errors.count, "error") %> prohibited this archivo from being saved:</h2>
+    <h2><%= pluralize(@archivo.errors.count, "error") %> prohibited this archivo from being saved:</h2>
     <ul>
-      <% @article.errors.full_messages.each do |message| %>
+      <% @archivo.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
   </div>
   <% end %>
 
-  <%= simple_form_for(@article, html: { multipart: true }) do |f| %>
+  <%= simple_form_for(@archivo, html: { multipart: true }) do |f| %>
 
     <div>
       <%= f.label :title, "Título de obra", class: "form-label" %>
@@ -22,23 +22,23 @@
       <div class="col-md-4">
         <%= f.label "Imagen de portada", class: "form-label" %>
         <%= f.file_field :photo, as: :file, class: "form-control" %>
-        <% if @article.photo.attached? %>
+        <% if @archivo.photo.attached? %>
           <div class="mt-2">
-            <%= image_tag @article.photo, class: "img-fluid" %>
+            <%= image_tag @archivo.photo, class: "img-fluid" %>
           </div>
         <% end %>
       </div>
 
       <div class="col-md-4">
         <%= f.label :category_id, "Categoría", class: "form-label" %><br>
-        <%= f.select :category_id, options_for_select(Category.all.map { |c| [c.name, c.id] }, @article.category_id), class: "form-control" %>
+        <%= f.select :category_id, options_for_select(Category.all.map { |c| [c.name, c.id] }, @archivo.category_id), class: "form-control" %>
       </div>
 
       <div class="col-md-4">
         <%= f.label :images, 'Images', class: "form-label" %>
         <%= f.file_field :images, multiple: true %>
-        <% if @article.images.attached? %>
-          <% @article.images.each do |img| %>
+        <% if @archivo.images.attached? %>
+          <% @archivo.images.each do |img| %>
             <div class="mt-2">
               <%= image_tag img, class: "img-fluid" %>
             </div>
@@ -59,7 +59,7 @@
 
     <div class="actions mt-4">
       <%= f.submit "Update Archivo", class: "btn btn-primary" %>
-      <%= link_to 'Cancel', archivo_path(@article), class: "btn btn-secondary" %>
+      <%= link_to 'Cancel', archivo_path(@archivo), class: "btn btn-secondary" %>
     </div>
   <% end %>
 </div>
