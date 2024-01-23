@@ -8,6 +8,9 @@ class ArchivosController < ApplicationController
 
   # GET /archivos/1
   def show
+    @archivo = Archivo.find(params[:id])
+    @archivos = Archivo.all
+    @articles = Article.all
   end
 
   # GET /archivos/new
@@ -17,6 +20,9 @@ class ArchivosController < ApplicationController
 
   # GET /archivos/1/edit
   def edit
+    @archivo = Archivo.find(params[:id])
+    @archivos = Archivo.all
+    @articles = Article.all
   end
 
   # POST /archivos
@@ -53,6 +59,14 @@ class ArchivosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def archivo_params
-      params.require(:archivo).permit(:title, :user_id, :category_id, :vimeo_link, :photo, images: [])
+      # Start with the base set of permitted parameters
+      permitted_params = params.require(:archivo).permit(:title, :user_id, :category_id, :vimeo_link, :photo)
+
+      # Conditionally merge `images` into the permitted parameters if they are present in the form submission
+      if params[:archivo][:images]
+        permitted_params.merge!(images: [])
+      end
+
+      permitted_params
     end
 end

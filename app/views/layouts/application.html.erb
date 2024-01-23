@@ -63,24 +63,35 @@
                 <h1><a href="/">Enea Lebrun</a></h1>
                 <div class='nav animated bounceInDown'>
                   <ul>
-  <li>
-    <%= link_to 'Biografia', '#biografia', class: ('bold' if request.fullpath.include?('#biografia')) %>
-  </li>
-  <% if @articles.present? && @articles.any? %>
-    <% @articles.reverse_each do |article| %>
-      <li>
-        <%= link_to article.title, article_path(article), class: ('bold' if current_page?(article_path(article))) %>
-      </li>
-    <% end %>
-  <% else %>
-    <li>No hay proyectos listados</li>
-  <% end %>
-  <li>
-    <%= link_to 'Contacto', '#contacto', class: ('bold' if request.fullpath.include?('#contacto')) %>
-  </li>
-</ul>
 
+
+                    <% if @articles.present? && @articles.any? %>
+                      <% @articles.reverse_each do |article| %>
+                        <li>
+                          <%= link_to article.title, article_path(article), class: ('bold' if current_page?(article_path(article))) %>
+                        </li>
+                      <% end %>
+                    <% else %>
+                      <li>No hay proyectos listados</li>
+                    <% end %>
+
+                     <li class="nav-item dropdown mt-5">
+                        <%= link_to 'Archivos', '#', class: 'nav-link dropdown-toggle', id: 'archivoDropdown', data: { bs_toggle: 'dropdown' }, aria: { expanded: 'false' } %>
+                        <ul class="dropdown-menu" aria-labelledby="archivoDropdown">
+                          <% Archivo.all.each do |archivo| %>
+                            <li>
+                             <%= link_to archivo.title, archivo_path(archivo), class: 'dropdown-item' + (current_page?(archivo_path(archivo)) ? ' active' : '') %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </li>
+
+                    <li>
+                      <%= link_to 'Info', '#biografia', class: ('bold' if request.fullpath.include?('#biografia')) %>
+                    </li>
+                  </ul>
                 </div>
+
 
             </div>
 

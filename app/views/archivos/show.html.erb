@@ -20,11 +20,13 @@
                         <% end %>
 
                         <!-- Slide 2 with archivo body -->
-                        <div class="slide">
-                            <div class="trix-content">
-                                <%= @archivo.body %>
-                            </div>
-                        </div>
+                         <% if @archivo.body? %>
+                          <div class="slide">
+                              <div class="trix-content">
+                                  <%= @archivo.body %>
+                              </div>
+                          </div>
+                        <% end %>
 
                         <!-- Additional slides for each image -->
                         <% if @archivo.images.attached? %>
@@ -51,8 +53,15 @@
                     </div>
 
                     <!-- Inside the slider-container -->
-                    <div class="arrow-left">&larr;</div>
-                    <div class="arrow-right">&rarr;</div>
+                    <% total_slides = @archivo.images.attached? ? @archivo.images.count : 0 %>
+                    <% total_slides += @archivo.photo.attached? ? 1 : 0 %>
+                    <% total_slides += @archivo.body.present? ? 1 : 0 %>
+                    <% total_slides += @archivo.vimeo_link.present? ? 1 : 0 %>
+
+                    <% if total_slides > 1 %>
+                      <div class="arrow-left">&larr;</div>
+                      <div class="arrow-right">&rarr;</div>
+                    <% end %>
                     <!-- Slider dots -->
                     <div class="slider-dots">
                         <!-- Logic for adding dots based on the content -->
@@ -82,3 +91,27 @@
         </div>
     </div>
 </section>
+
+
+<!-- At the end of your `show.html.erb` file -->
+<script type="text/javascript">
+  window.addEventListener('load', (event) => {
+    var totalSlides = 0;
+    totalSlides += <%= @archivo.photo.attached? ? 1 : 0 %>;
+    totalSlides += <%= @archivo.body.present? ? 1 : 0 %>;
+    totalSlides += <%= @archivo.images.attached? ? @archivo.images.count : 0 %>;
+    totalSlides += <%= @archivo.vimeo_link.present? ? 1 : 0 %>;
+
+    if (totalSlides > 1) {
+      document.querySelector('.arrow-left').style.display = 'block';
+      document.querySelector('.arrow-right').style.display = 'block';
+    }
+  });
+</script>
+
+<!-- Hide arrows by default in your CSS -->
+<style type="text/css">
+  .arrow-left, .arrow-right {
+    display: none;
+  }
+</style>
