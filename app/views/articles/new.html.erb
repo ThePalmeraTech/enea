@@ -21,20 +21,21 @@
 
 
     <div class="row p-3">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <%= f.label "Imagen de portada", class: "form-label" %>
         <%= f.file_field :photo, as: :file, class: "form-control" %>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <%= f.label :category_id, "Selecciona una categoría o #{link_to 'agrega una nueva', new_category_path}".html_safe, class: "form-label" %> <br>
         <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }), class: "form-control" %>
       </div>
 
-      <div class="field col-md-4">
-        <%= f.label :images, 'Images', class: "form-label" %>
-        <%= f.file_field :images, multiple: true %>
-      </div>
+      <div class="field col-md-12">
+    <%= f.label :images, 'Images', class: "form-label" %>
+    <%= f.file_field :images, multiple: true, id: "image-input", accept: "image/*" %>
+    <div id="image-preview" class="image-preview-container"></div>
+</div>
 
     </div>
 
@@ -57,3 +58,42 @@
   <% end %>
 
 </div>
+
+<style>
+    .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    .image-preview-container img {
+        max-width: 300px;
+        max-height: 300px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+</style>
+<script>
+    document.getElementById('image-input').addEventListener('change', function(event) {
+        var imageContainer = document.getElementById('image-preview');
+        imageContainer.innerHTML = ''; // Clear existing previews
+        var files = event.target.files;
+
+        for(var i = 0; i < files.length; i++) {
+            var file = files[i];
+            if(file.type.startsWith('image/')) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    imageContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+</script>
