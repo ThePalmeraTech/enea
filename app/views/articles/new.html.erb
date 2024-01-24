@@ -31,7 +31,7 @@
         <%= f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }), class: "form-control" %>
       </div>
 
-      <div class="field col-md-6">
+      <div class="field col-md-12">
     <%= f.label :images, 'Images', class: "form-label" %>
     <%= f.file_field :images, multiple: true, id: "image-input", accept: "image/*" %>
     <div id="image-preview" class="image-preview-container"></div>
@@ -67,8 +67,8 @@
     }
 
     .image-preview-container img {
-        max-width: 100px;
-        max-height: 100px;
+        max-width: 300px;
+        max-height: 300px;
         margin-right: 10px;
         margin-bottom: 10px;
         border: 1px solid #ddd;
