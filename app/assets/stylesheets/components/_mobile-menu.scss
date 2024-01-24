@@ -1,6 +1,6 @@
 .header {
   background-color: white;
-  position: fixed; // This establishes a new stacking context.
+  position: relative; // This establishes a new stacking context.
   top: 0;
   left: 0;
   width: 100%;
